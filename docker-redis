@@ -29,7 +29,7 @@ start() {
         pull_latest_image
     fi
 
-    echogreen 'Starting container...'
+    echogreen "Starting container..."
     if [ "$(container_status)" == "not found" ]; then
         docker_command
     else
@@ -90,6 +90,7 @@ die() {
 docker_command() {
 
     docker run -d --restart=always -v /var/run/docker.sock:/tmp/docker.sock:ro -p 6379:6379 --name $SERVICE_NAME $SERVICE_NAME 1> /dev/null
+
 }
 
 # Returns true if docker is running, false otherwise
@@ -120,6 +121,7 @@ echored() {
 
 }
 
+# Function that pulls the latest version of the container's image
 pull_latest_image() {
 
     docker pull $SERVICE_NAME:latest
